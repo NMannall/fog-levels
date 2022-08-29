@@ -1,6 +1,7 @@
 {
   "id": "fog-levels",
-  "title": "New Module",
+  "name": "fog-levels",
+  "title": "Fog Levels",
   "description": "",
   "version": "This is auto replaced",
   "library": "false",
@@ -10,7 +11,13 @@
     "verified": 10,
     "maximum": 11
   },
+  "minimumCoreVersion": 9,
+  "compatibleCoreVersion": 9,
   "authors": [
+    {
+      "name": "Nathan Mannall",
+      "url": "https://github.com/NMannall"
+    },
     {
       "name": "The League of Extraordinary FVTT Developers",
       "url": "https://github.com/League-of-Foundry-Developers",
@@ -22,6 +29,7 @@
     "requires": []
   },
   "esmodules": [
+    "scripts/config.js",
     "scripts/module.js"
   ],
   "scripts": [
