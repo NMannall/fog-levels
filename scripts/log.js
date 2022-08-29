@@ -31,7 +31,9 @@ export class log {
             const shouldLog = force || allowedDebugLevel >= level;
       
             if (shouldLog) {
-                console.log(`${MODULE_ID} | ${propertyNameForValue(this.LogLevel, level)} -- ${data}`);
+                let prefix = `${MODULE_ID} | ${propertyNameForValue(this.LogLevel, level)} --`;
+                if (typeof data === 'string') console.log(`${prefix} ${data}`);
+                else console.log(prefix, data);
             }
         } catch (e) {
             console.error(e.message);

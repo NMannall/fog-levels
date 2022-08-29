@@ -28,6 +28,16 @@
     "systems": [],
     "requires": []
   },
+  "dependencies": [
+    {
+      "name": "lib-wrapper",
+      "type": "module"
+    },
+    {
+      "name": "levels",
+      "type": "module"
+    }
+  ]
   "esmodules": [
     "scripts/config.js",
     "scripts/module.js"

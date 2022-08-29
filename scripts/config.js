@@ -50,4 +50,6 @@ Hooks.once('ready', async function() {
             },
         }).render(true);
     }
+
+    game.settings.set(MODULE_ID, DONT_REMIND_AGAIN_KEY, false)
 });
