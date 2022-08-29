@@ -15,6 +15,8 @@ Hooks.once('init', async function() {
 });
 
 // Display pop-up to GM
+// TODO: Add setting to display this again once "Don't remind me again" has been clicked
+// TODO: Add actual useful information on here/notify an update is available.
 Hooks.once('ready', async function() {
 
     // Module title
@@ -50,6 +52,4 @@ Hooks.once('ready', async function() {
             },
         }).render(true);
     }
-
-    game.settings.set(MODULE_ID, DONT_REMIND_AGAIN_KEY, false)
 });

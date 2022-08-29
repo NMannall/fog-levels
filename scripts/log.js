@@ -1,19 +1,6 @@
 import { propertyNameForValue } from './helpers.js'
 
 export class log {
-    constructor() {
-        this.setHooks();
-    }
-
-    setHooks() {
-        this.setHooks.on("fogLevelsInit"), () => {
-            this.init();
-        }
-    }
-
-    static init() {
-        
-    }
 
     static LogLevel = {
         NONE: 0,
@@ -24,7 +11,13 @@ export class log {
         ALL: 5,
     };
 
-    static _log(level, data, force) {
+    /**
+    * Write to console in log format at the given level
+    * @param {log.LogLevel} level Logging level
+    * @param {string | any} data Message to be logged
+    * @param {boolean} force Ignore logging level
+    */
+    static _log(level, data, force=false) {
         let MODULE_ID = CONFIG.FogLevels.MODULE_ID
         try {
             const allowedDebugLevel = game.modules.get('_dev-mode')?.api?.getPackageDebugValue(MODULE_ID, 'level')
@@ -40,18 +33,38 @@ export class log {
         }
     }
 
+    /**
+     * Log message at info level
+     * @param {string} data Message to be logged
+     * @param {boolean} force Ignore logging level
+     */
     static info (data, force=false) {
         this._log(this.LogLevel.INFO, data, force);
     }
 
+    /**
+     * Log message at error level
+     * @param {string} data Message to be logged
+     * @param {boolean} force Ignore logging level
+     */
     static error (data, force=false) {
         this._log(this.LogLevel.ERROR, data, force);
     }
 
+    /**
+     * Log message at debug level
+     * @param {string} data Message to be logged
+     * @param {boolean} force Ignore logging level
+     */
     static debug (data, force=false) {
         this._log(this.LogLevel.DEBUG, data, force);
     }
 
+    /**
+     * Log message at warn level
+     * @param {string} data Message to be logged
+     * @param {boolean} force Ignore logging level
+     */
     static warn (data, force=false) {
         this._log(this.LogLevel.WARN, data, force)
     }

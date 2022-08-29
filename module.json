@@ -2,26 +2,16 @@
   "id": "fog-levels",
   "name": "fog-levels",
   "title": "Fog Levels",
-  "description": "",
+  "description": "Expand fog of war to save explored areas at each level.",
   "version": "This is auto replaced",
   "library": "false",
   "manifestPlusVersion": "1.2.0",
-  "compatibility": {
-    "minimum": 10,
-    "verified": 10,
-    "maximum": 11
-  },
   "minimumCoreVersion": 9,
   "compatibleCoreVersion": 9,
   "authors": [
     {
       "name": "Nathan Mannall",
       "url": "https://github.com/NMannall"
-    },
-    {
-      "name": "The League of Extraordinary FVTT Developers",
-      "url": "https://github.com/League-of-Foundry-Developers",
-      "discord": "discordID#0001"
     }
   ],
   "relationships": {
