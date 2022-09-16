@@ -1,6 +1,6 @@
 // Register logging levels with dev-mode module
 Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {    
-    registerPackageDebugFlag(CONFIG.FogLevels.MODULE_ID, 'level');
+    registerPackageDebugFlag("fog-levels", "level");
 });
 
 // Config on initialisation
