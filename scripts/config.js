@@ -36,10 +36,9 @@ Hooks.once('init', async function() {
                 throw new Error("FogLevels | You do not have permission to access the FogExploration object of another user");
             }
             
-            console.log("FogLevels | args: ", args);
-            console.log("FogLevels | sceneId: ", sceneId);
-            console.log("FogLevels | userId: ", userId);
-            console.log("FogLevels | elevation: ", elevation);
+            console.log("FogLevels | sceneId:", sceneId, "userId:", userId, "elevation:", elevation);
+
+            if (elevation != canvas.fog.exploration.elevation) return null;
 
             // Return cached exploration
             let exploration = collection.find(x => (x.user.id === userId) && (x.scene.id === sceneId) && (x.elevation == elevation));
