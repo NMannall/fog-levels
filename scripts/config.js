@@ -25,25 +25,38 @@ Hooks.once('init', async function() {
 
     libWrapper.register(
         CONFIG.FogLevels.MODULE_ID,
+        'FogExploration.prototype.explore', async function (wrapped, ...args) {
+            if (this.elevation != CONFIG.Levels.currentToken.document.elevation) {
+                console.log('fog-levels | Stopped explore update');
+                return;
+            }
+            console.log('fog-levels | Explore update');
+            return wrapped(...args);
+        },
+        'MIXED'
+    );
+
+    libWrapper.register(
+        CONFIG.FogLevels.MODULE_ID,
         'FogExploration.get', async function (wrapped, ...args) {
-            console.log('FogLevels | canvas.fog.exploration.get was called');
+            console.log('fog-levels | canvas.fog.exploration.get was called');
             const collection = game.collections.get("FogExploration");
             const sceneId = (args[0]?.scene || canvas.scene)?.id || null;
             const userId = (args[0]?.user || game.user)?.id;
             const elevation = CONFIG.Levels?.currentToken?.document?.elevation;
             if ( !sceneId || !userId || elevation === undefined) return null;
             if ( !(game.user.isGM || (userId === game.user.id)) ) {
-                throw new Error("FogLevels | You do not have permission to access the FogExploration object of another user");
+                throw new Error("fog-levels | You do not have permission to access the FogExploration object of another user");
             }
             
-            console.log("FogLevels | sceneId:", sceneId, "userId:", userId, "elevation:", elevation);
+            console.log("fog-levels | sceneId:", sceneId, "userId:", userId, "elevation:", elevation);
 
-            if (elevation != canvas.fog.exploration.elevation) return null;
+            // if (elevation != canvas.fog.exploration.elevation) return null;
 
             // Return cached exploration
             let exploration = collection.find(x => (x.user.id === userId) && (x.scene.id === sceneId) && (x.elevation == elevation));
             if ( exploration ) {
-                console.log("FogLevels | Found cached exploration");
+                console.log("fog-levels | Found cached exploration");
                 return exploration;
             }
 
@@ -58,10 +71,10 @@ Hooks.once('init', async function() {
             })
             exploration = explorations.length ? explorations.shift() : null;
             if ( exploration ) {
-                console.log("FogLevels | Found persisted exploration");
+                console.log("fog-levels | Found persisted exploration");
                 collection.set(exploration.id, exploration);
             } else {
-                console.log("FogLevels | Found no exploration");
+                console.log("fog-levels | Found no exploration");
             }
             return exploration;
         },        

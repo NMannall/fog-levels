@@ -4,16 +4,22 @@ import { log } from './log.js'
 Hooks.on("updateToken", async function (token, updates) {
     if(game.user.isGM) return;
     if(token.isOwner && "elevation" in updates) {
-        log.info(`Token '${token.actorId}' set elevation to '${token.elevation}'`);
-        await canvas.fog.commit();
+        log.info("Elevation changed");
+        canvas.fog.commit();
         await canvas.fog.save();
-        await canvas.fog.load();
-        canvas.fog.exploration.elevation = token.elevation;
+        await canvas.fog._handleReset();
+
         return;
     }
-    if (canvas.fog.exploration.elevation == null) {  // Attempt to load FoW if elevation for current FoW is null and set elevation.
+});
+
+Hooks.on("sightRefresh", async function (arg) {
+    log.info(arg);
+    if(game.user.isGM) return;
+    if(canvas.fog.exploration == null || canvas.fog.exploration.elevation == null) {  // Attempt to load FoW if elevation for current FoW is null and set elevation.
+        log.info("FoW undefined");
         await canvas.fog.load();
-        canvas.fog.exploration.elevation = token.elevation;
-        return;
+        canvas.fog.exploration.elevation = CONFIG.Levels.currentToken.document.elevation;
     }
+    return;
 });
